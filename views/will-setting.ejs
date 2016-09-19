@@ -1,0 +1,737 @@
+<% include header %>
+<% include main-nav %>
+
+  <script src="/js/openpgp.min.js"></script>
+  <script src="/js/secrets.min.js"></script>
+  <!--<script src="/js/bitcoinaddress-bundle.min.js"></script>-->
+  
+  <!--<script>
+      $(document).ready(function() {
+          bitcoinaddress.init({
+  
+              // jQuery selector defining bitcon addresses on the page
+              // needing the boost
+              selector: ".bitcoin-address",
+  
+              // Id of the DOM template element we use to decorate the addresses.
+              // This must contain placefolder .bitcoin-address
+              template: "bitcoin-address-template",
+  
+              // Passed directly to QRCode.js
+              qr : {
+                  width: 128,
+                  height: 128,
+                  colorDark : "#000000",
+                  colorLight : "#ffffff"
+              },
+  
+              // By default the generated QR code is bitcoin:// URL.
+              // However you might want to change this for altcoins, which do not have
+              // official protocol handlers. Set true to remove bitcoin:// from
+              // QR code.
+              qrRawAddress: false
+          });
+      });
+  </script>-->
+  
+  <div class="app">
+    <div class="appInner">
+      
+      <div class="appSideNav">
+        <div class="formRow">
+          Regardless of simple or advanced selection, the will generation process is identical. The simple flow eliminates the complexity to make it easy to use for non-technical user.
+        </div>
+        <div class="title">
+          Select your preferred method of creation:
+        </div>
+        <div>
+          <div class="formRow">
+            <div class="formRowType">
+              <button id="appWillSettingSimpleBtn">Simple</button> 
+            </div>
+            <div class="formRowType">
+              <button id="appWillSettingAdvancedBtn">Advanced</button>
+            </div>
+            <div class="clear"></div>
+          </div>
+        </div>
+        <div class="title">
+          Follow these step-by-step instructions:
+        </div>
+        <div class="appWillSettingInstructionSimple">
+          <div class="appWillSettingInstructionSimpleStep1">
+            Step 1: Select Will Preset
+          </div>
+          <div class="appWillSettingInstructionSimpleStep2">
+            Step 2: Payment for Will
+          </div>
+          <div class="appWillSettingInstructionSimpleStep3">
+            Step 3: Post Will to Blockchain
+          </div>
+        </div>
+        <div class="appWillSettingInstructionAdvanced">
+          <div class="appWillSettingInstructionAdvancedStep1">
+            Step 1: Generate a new set of keys
+          </div>
+          <div class="appWillSettingInstructionAdvancedStep2">
+            Step 2: Select how to divide key access
+          </div>
+          <div class="appWillSettingInstructionAdvancedStep3">
+            Step 3: Enter Will creation preference
+          </div>
+          <div class="appWillSettingInstructionAdvancedStep4">
+            Step 4: Enter your Will content
+          </div>
+          <div class="appWillSettingInstructionAdvancedStep5">
+            Step 5: Generate your Will
+            <!--
+            Site should show summary without refreshing
+            
+            Encrypt Will content
+            Shamir Secret Private Key
+            Show Shamir secret key
+            Select those to keep with us for escrow if any
+            Ask user to store them before posting on blockchain
+            
+            -->
+          </div>
+          <div class="appWillSettingInstructionAdvancedStep6">
+            Step 6: Payment for Will
+          </div>
+          <div class="appWillSettingInstructionAdvancedStep7">
+            Step 7: Post Will to Blockchain
+          </div>
+        </div>
+      </div>
+  
+  <div class="appWillSetting">
+    <div class="appWillSettingSimple">
+      <div class="appWillSettingSimpleStep1">
+        <div>
+          <div>
+            Select type of account
+          </div>
+          <div>
+            <button>Casual</button>
+          </div>
+          <div>
+            <button>Paranoid</button>
+          </div>
+        </div>
+        <div>
+          <div class="formRow">
+            <div>
+              Unlock time for Will (Optional)
+            </div>
+            <div>
+              <input type="number" min="0" max="10" value="0">
+            </div>
+          </div>
+        </div>
+        <div class="formRow">
+          <div>
+            Will Content
+          </div>
+          <div>
+            <textarea id="willContentSimple"></textarea>
+          </div>
+        </div>
+        <div>
+          <button class="appWillSettingSimpleStep1Next">
+            Next
+          </button>
+        </div>
+      </div>
+      <div class="appWillSettingSimpleStep2">
+        
+        <div class="appWillSettingStepSection">
+          <div class="formRow">
+            <div>
+              Once you have confirm your will, proceed with the payment below. Will creation will be processed upon payment.
+            </div>
+          </div>
+          <div class="formRow">
+            <div>
+              Transaction Fees required to complete Will
+            </div>
+            <div>
+              *Fees include blockchain transaction fees + the service we provide
+            </div>
+            <div>
+              USD $1.00
+            </div>
+          </div>
+          <div class="formRow">
+            <div>
+              Select Payment method
+            </div>
+            <div>
+              Credit Card / Debit Card
+            </div>
+            <div>
+              Bitcoin
+            </div>
+            <div>
+              Ethereum
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="appWillSettingSimpleStep2Back">
+            Back
+          </button>
+          <button class="appWillSettingSimpleStep2Next">
+            Next
+          </button>
+        </div>
+      </div>
+      <div class="appWillSettingSimpleStep3">
+        
+        <div>
+          <button class="appWillSettingSimpleStep3Back">
+            Back
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="appWillSettingAdvanced">
+      <div class="appWillSettingAdvancedStep1">
+        <div class="appWillSettingStepInstruction">
+          Generate your private / public key. It will be used to secure your will's content
+        </div>
+        <div class="appWillSettingStepSection">
+          <div>
+            <button id="generateKey">
+              Generate
+            </button>
+          </div>
+          <div class="formRow">
+            <div>
+              Private Key
+            </div>
+            <div>
+              <textarea id="privgenkey"></textarea>
+            </div>
+          </div>
+          <div class="formRow">
+            <div>
+              Public Key
+            </div>
+            <div>
+              <textarea id="pubgenkey"></textarea>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="appWillSettingAdvancedStep1Next">
+            Next
+          </button>
+        </div>
+      </div>
+      <div class="appWillSettingAdvancedStep2">
+        <div class="appWillSettingStepSection">
+          <div class="formRow">
+            <div>
+              Select how many ways to split your secret key
+            </div>
+            <div>
+              <input id="splitTotal" type="number" min="3" max="10" value="3">
+            </div>
+          </div>
+          
+          <div class="formRow">
+            <div>
+              Select how many keys will be required to unlock will
+            </div>
+            <div>
+              <input id="splitRequired" type="number" min="2" max="10" value="2">
+            </div>
+          </div>
+        </div>
+        
+        <!--<div class="formRow">-->
+        <!--  <div>-->
+        <!--    How many keys should we store on your behalf? [ amount should be less than what's required to unlock your will]-->
+        <!--  </div>-->
+        <!--  <div>-->
+        <!--    <input type="number" min="0" max="10" value="0">-->
+        <!--  </div>-->
+        <!--</div>-->
+        
+        <div>
+          <button class="appWillSettingAdvancedStep2Back">
+            Back
+          </button>
+          <button class="appWillSettingAdvancedStep2Next">
+            Next
+          </button>
+        </div>
+      </div>
+      <div class="appWillSettingAdvancedStep3">
+        <div class="appWillSettingStepSection">
+          <div class="formRow">
+            <div>
+              Select which blockchain the Will should be pushed to
+            </div>
+            <div>
+              <select>
+                <option value="bitcoin">Bitcoin</option>
+                <option value="ethereum">Ethereum</option>
+                <option value="lisk">lisk</option>
+                <option value="litecoin">Litecoin</option>
+                <option value="dash">Dash</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="formRow">
+            <div>
+              Unlock time for Will (Optional)
+            </div>
+            <div>
+              <input type="number" min="0" max="10" value="0">
+            </div>
+          </div>
+        </div>
+        
+        
+        <div>
+          <button class="appWillSettingAdvancedStep3Back">
+            Back
+          </button>
+          <button class="appWillSettingAdvancedStep3Next">
+            Next
+          </button>
+        </div>
+      </div>
+      <div class="appWillSettingAdvancedStep4">
+        <div class="appWillSettingStepSection">
+          <div class="formRow">
+            <div>
+              Will Content
+            </div>
+            <div>
+              <textarea id="willContent"></textarea>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div>
+          <button class="appWillSettingAdvancedStep4Back">
+            Back
+          </button>
+          <button class="appWillSettingAdvancedStep4Next">
+            Next
+          </button>
+        </div>
+      </div>
+      <div class="appWillSettingAdvancedStep5">
+        <div class="appWillSettingStepSection">
+          <div class="formRow">
+            <div>
+              Select keys that you want to store with us by clicking on the icon beside the key
+            </div>
+            <div id="secret">
+              
+            </div>
+          </div>
+          <div class="formRow">
+            <div>
+              This is the final encrypted message posted
+            </div>
+            <div>
+              <textarea id="message"></textarea>
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="appWillSettingAdvancedStep5Back">
+            Back
+          </button>
+          <button class="appWillSettingAdvancedStep5Next">
+            Next
+          </button>
+        </div>
+      </div>
+      <div class="appWillSettingAdvancedStep6">
+        <div class="appWillSettingStepSection">
+          <div class="formRow">
+            <div>
+              Once you have confirm your will, proceed with the payment below. Will creation will be processed upon payment.
+            </div>
+          </div>
+          <div class="formRow">
+            <div>
+              Transaction Fees required to complete Will
+            </div>
+            <div>
+              *Fees include blockchain transaction fees + the service we provide
+            </div>
+            <div>
+              USD $1.00
+            </div>
+          </div>
+          <div class="formRow">
+            <div>
+              Select Payment method
+            </div>
+            <div>
+              Credit Card / Debit Card
+            </div>
+            <div>
+              Bitcoin
+            </div>
+            <input type="hidden" id="tempKey" value="<%= tempKey %>">
+            <div id="tempAddress">
+              <%= tempAddress %>
+            </div>
+            <div>
+              <!--<form action="https://bitpay.com/checkout" target="_blank" method="post" >
+                <input type="hidden" name="action" value="checkout" />
+                <input type="hidden" name="posData" value="" />
+                <input type="hidden" name="data" value="wOhJ0g01xmDtvkfbkSVAVrcmTZnmVu0fHDcztnWCM0sVsOE52Q7ZvJpb/PZO5qHfoC6WEiy9RF2oOVqIM597F3zBknYoARXfC3ghm44QwkpyfS+1rG9QiinGIT0O8s7kGQXIx4RFGSbkExfQTc6+VCKcm11ZSqUtOsm6Wp4h6qbaPKp3BOt5Ov84ofdZCgZP/5MtnjgNpXahTm5gPZwPkD5QYapk2mizcX5HX0gK5zM94C2FM90IoD3e4G0FPeQclublVMZxNiD1r+2ZgFhL6w==" />
+                <input type="image" src="https://bitpay.com/img/button-small.png" border="0" name="submit" alt="BitPay, the easy way to pay with bitcoins." >
+              </form>-->
+            </div>
+            <!--<div>
+                    <strong class="bitcoin-address"
+    data-bc-amount="0.002"
+    data-bc-label="cryptowill"
+    data-bc-message="0.002 BTC Will Fee"
+    data-bc-address="1JyneX2EAtiQEqvSvR4ZVfFBw6ucCshpjJ">1JyneX2EAtiQEqvSvR4ZVfFBw6ucCshpjJ</strong>
+            </div>
+            <div>
+              <div id="bitcoin-address-template" class="bitcoin-address-container" style="display: none">
+                  <div>
+                    <span class="bitcoin-address"></span>
+                  </div>
+                  <a href="#" class="bitcoin-address-action bitcoin-address-action-send">
+                      <i class="fa fa-btc"></i>
+                      Pay from wallet
+                  </a>
+                  <a href="#" class="bitcoin-address-action bitcoin-address-action-copy">
+                      <i class="fa fa-copy"></i>
+                      Copy
+                  </a>
+                  <a href="#" class="bitcoin-address-action bitcoin-address-action-qr">
+                      <i class="fa fa-qrcode"></i>
+                      QR code
+                  </a>
+                  <div class="bitcoin-action-hint bitcoin-action-hint-send">
+                      Sending payment to the address from locally installed Bitcoin wallet app.
+                  </div>
+                  <div class="bitcoin-action-hint bitcoin-action-hint-copy">
+                      Press CTRL + C or &#x2318; + C to copy the Bitcoin address.
+                  </div>
+                  <div class="bitcoin-action-hint bitcoin-action-hint-qr">
+                      <p>
+                          Scan the QR code with your mobile Bitcoin app to
+                          make the payment:
+                      </p>
+                      <div class="bitcoin-address-qr-container">
+                      
+                      </div>
+                  </div>
+              </div>
+            </div>-->
+            <div>
+              Ethereum
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="appWillSettingAdvancedStep6Back">
+            Back
+          </button>
+          <button class="appWillSettingAdvancedStep6Next">
+            Next
+          </button>
+        </div>
+      </div>
+      
+      <div class="appWillSettingAdvancedStep7">
+        <div class="appWillSettingStepSection">
+          <div class="formRow">
+            
+          </div>
+        </div>
+        <div>
+          <button class="appWillSettingAdvancedStep7Back">
+            Back
+          </button>
+        </div>
+        <div>
+          <a href="/will-summary">
+            <div>
+              Proceed & View Will Summary
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+  <div class="clear"></div>
+    </div>
+  </div>
+  
+  <script>
+    
+  $(function(){
+    $(".appWillSettingInstructionSimple").css("display","block");
+    $(".appWillSettingInstructionAdvanced").css("display","none");
+      
+    //$(".appWillSettingSimple").css("display","block");
+    //$(".appWillSettingAdvanced").css("display","none");
+    $(".appWillSettingSimple").css("display","none");
+    $(".appWillSettingAdvanced").css("display","block");
+    
+    $(".appWillSettingSimpleStep2").css("display","none");
+    $(".appWillSettingSimpleStep3").css("display","none");
+    
+    $(".appWillSettingAdvancedStep2").css("display","none");
+    $(".appWillSettingAdvancedStep3").css("display","none");
+    $(".appWillSettingAdvancedStep4").css("display","none");
+    $(".appWillSettingAdvancedStep5").css("display","none");
+    $(".appWillSettingAdvancedStep6").css("display","none");
+    $(".appWillSettingAdvancedStep7").css("display","none");
+    
+    $(".appWillSettingInstructionSimpleStep1").css("font-weight","700");
+    $(".appWillSettingInstructionAdvancedStep1").css("font-weight","700");
+    
+    $("#appWillSettingSimpleBtn").click(function(){
+      $(".appWillSettingInstructionSimple").css("display","block");
+      $(".appWillSettingInstructionAdvanced").css("display","none");
+      
+      $(".appWillSettingSimple").css("display","block");
+      $(".appWillSettingAdvanced").css("display","none");
+    });
+    $("#appWillSettingAdvancedBtn").click(function(){
+      $(".appWillSettingInstructionSimple").css("display","none");
+      $(".appWillSettingInstructionAdvanced").css("display","block");
+      
+      $(".appWillSettingSimple").css("display","none");
+      $(".appWillSettingAdvanced").css("display","block");
+    });
+    
+    $(".appWillSettingSimpleStep1Next").click(function(){
+      $(".appWillSettingSimpleStep1").css("display","none");
+      $(".appWillSettingSimpleStep2").css("display","block");
+      
+      $(".appWillSettingInstructionSimpleStep2").css("font-weight","700");
+      $(".appWillSettingInstructionSimpleStep1").css("font-weight","normal");
+    })
+    $(".appWillSettingSimpleStep2Next").click(function(){
+      $(".appWillSettingSimpleStep2").css("display","none");
+      $(".appWillSettingSimpleStep3").css("display","block");
+      
+      $(".appWillSettingInstructionSimpleStep3").css("font-weight","700");
+      $(".appWillSettingInstructionSimpleStep2").css("font-weight","normal");
+    })
+    
+    $(".appWillSettingSimpleStep2Back").click(function(){
+      $(".appWillSettingSimpleStep1").css("display","block");
+      $(".appWillSettingSimpleStep2").css("display","none");
+      
+      $(".appWillSettingInstructionSimpleStep1").css("font-weight","700");
+      $(".appWillSettingInstructionSimpleStep2").css("font-weight","normal");
+    })
+    
+    $(".appWillSettingSimpleStep3Back").click(function(){
+      $(".appWillSettingSimpleStep2").css("display","block");
+      $(".appWillSettingSimpleStep3").css("display","none");
+      
+      $(".appWillSettingInstructionSimpleStep2").css("font-weight","700");
+      $(".appWillSettingInstructionSimpleStep3").css("font-weight","normal");
+    })
+    
+    
+    $(".appWillSettingAdvancedStep1Next").click(function(){
+      $(".appWillSettingAdvancedStep1").css("display","none");
+      $(".appWillSettingAdvancedStep2").css("display","block");
+      
+      $(".appWillSettingInstructionAdvancedStep2").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep1").css("font-weight","normal");
+    })
+    $(".appWillSettingAdvancedStep2Next").click(function(){
+      $(".appWillSettingAdvancedStep2").css("display","none");
+      $(".appWillSettingAdvancedStep3").css("display","block");
+      
+      $(".appWillSettingInstructionAdvancedStep3").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep2").css("font-weight","normal");
+      
+      splitPrivateKey();
+    })
+    $(".appWillSettingAdvancedStep3Next").click(function(){
+      $(".appWillSettingAdvancedStep3").css("display","none");
+      $(".appWillSettingAdvancedStep4").css("display","block");
+      
+      $(".appWillSettingInstructionAdvancedStep4").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep3").css("font-weight","normal");
+    })
+    $(".appWillSettingAdvancedStep4Next").click(function(){
+      $(".appWillSettingAdvancedStep4").css("display","none");
+      $(".appWillSettingAdvancedStep5").css("display","block");
+      
+      $(".appWillSettingInstructionAdvancedStep5").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep4").css("font-weight","normal");
+      
+      encrypt();
+    })
+    $(".appWillSettingAdvancedStep5Next").click(function(){
+      $(".appWillSettingAdvancedStep5").css("display","none");
+      $(".appWillSettingAdvancedStep6").css("display","block");
+      
+      $(".appWillSettingInstructionAdvancedStep6").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep5").css("font-weight","normal");
+    })
+    $(".appWillSettingAdvancedStep6Next").click(function(){
+      $(".appWillSettingAdvancedStep6").css("display","none");
+      $(".appWillSettingAdvancedStep7").css("display","block");
+      
+      $(".appWillSettingInstructionAdvancedStep7").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep6").css("font-weight","normal");
+    })
+    
+    $(".appWillSettingAdvancedStep2Back").click(function(){
+      $(".appWillSettingAdvancedStep1").css("display","block");
+      $(".appWillSettingAdvancedStep2").css("display","none");
+      
+      $(".appWillSettingInstructionAdvancedStep1").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep2").css("font-weight","normal");
+    })
+    $(".appWillSettingAdvancedStep3Back").click(function(){
+      $(".appWillSettingAdvancedStep2").css("display","block");
+      $(".appWillSettingAdvancedStep3").css("display","none");
+      
+      $(".appWillSettingInstructionAdvancedStep2").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep3").css("font-weight","normal");
+    })
+    $(".appWillSettingAdvancedStep4Back").click(function(){
+      $(".appWillSettingAdvancedStep3").css("display","block");
+      $(".appWillSettingAdvancedStep4").css("display","none");
+      
+      $(".appWillSettingInstructionAdvancedStep3").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep4").css("font-weight","normal");
+    })
+    $(".appWillSettingAdvancedStep5Back").click(function(){
+      $(".appWillSettingAdvancedStep4").css("display","block");
+      $(".appWillSettingAdvancedStep5").css("display","none");
+      
+      $(".appWillSettingInstructionAdvancedStep4").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep5").css("font-weight","normal");
+    })
+    $(".appWillSettingAdvancedStep6Back").click(function(){
+      $(".appWillSettingAdvancedStep5").css("display","block");
+      $(".appWillSettingAdvancedStep6").css("display","none");
+      
+      $(".appWillSettingInstructionAdvancedStep5").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep6").css("font-weight","normal");
+    })
+    $(".appWillSettingAdvancedStep7Back").click(function(){
+      $(".appWillSettingAdvancedStep6").css("display","block");
+      $(".appWillSettingAdvancedStep7").css("display","none");
+      
+      $(".appWillSettingInstructionAdvancedStep6").css("font-weight","700");
+      $(".appWillSettingInstructionAdvancedStep7").css("font-weight","normal");
+    })
+    
+      generate();
+      function generate() {
+          //openpgp.init();
+          
+          var options = {
+              userIds: [{ name:'Jon Smith', email:'jon@example.com' }], 
+              //numBits: 4096,                                            
+              numBits: 512//,                                            
+              //passphrase: 'secret'       
+          };
+          
+          openpgp.generateKey(options).then(function(key) {
+            var privkey = key.privateKeyArmored; 
+            var pubkey = key.publicKeyArmored;
+            
+            $('#privgenkey').val(privkey);
+            $('#pubgenkey').val(pubkey);
+          });
+          
+          //var keys = openpgp.generate_key_pair(1, 512, 'CryptoWill', '');
+          //$('#privgenkey').val(keys.privateKeyArmored);
+          //$('#pubgenkey').val(keys.publicKeyArmored);
+      }
+      
+      
+      $("#generateKey").click(function(){
+        generate();
+      })
+      
+      
+      function encrypt() {
+          var options, encrypted;
+
+          var pubkey = $('#pubgenkey').val();
+          var privkey = $('#privgenkey').val();
+
+          options = {
+            data: $('#willContent').val(),                             
+            publicKeys: openpgp.key.readArmored(pubkey).keys,
+            privateKeys: openpgp.key.readArmored(privkey).keys 
+          };
+
+          openpgp.encrypt(options).then(function(ciphertext) {
+              encrypted = ciphertext.data;
+              $('#message').val(encrypted);
+              
+              decrypt(encrypted, pubkey, privkey);
+              function decrypt(encrypted, pubkey, privkey) {
+                options = {
+                    message: openpgp.message.readArmored(encrypted),   
+                    publicKeys: openpgp.key.readArmored(pubkey).keys, 
+                    privateKey: openpgp.key.readArmored(privkey).keys[0] 
+                };
+  
+                openpgp.decrypt(options).then(function(plaintext) {
+                    console.log( plaintext.data );
+                });
+              }
+          });
+      }
+      
+      function splitPrivateKey() {
+        var splitTotal = parseInt($("#splitTotal").val());
+        
+        var key = secrets.str2hex($('#privgenkey').val()); 
+        var shares = secrets.share(key, splitTotal, 3);
+        
+        $("#secret").html("");
+        
+        for (var i=0; i< splitTotal; i++) {
+          $("#secret").append("<div><input type='text' value='"+shares[i]+"'></div>");
+        }
+        
+      }
+
+      createWill() ;
+      function createWill() {
+        $.ajax({
+          url: '/push-create-will',
+          type: 'POST',
+          data: {
+            tempAddress: $("#tempAddress").html(),
+            tempKey: $("#tempKey").val()
+          },
+          success: function(data){
+            console.log('Search results:', data);
+          },
+          error: function(data){
+            console.log(data);
+          }
+        })
+      }
+      
+  });
+  </script>
+
+<% include footer %>

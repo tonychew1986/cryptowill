@@ -1,0 +1,42 @@
+<% include header %>
+<% include main-nav %>
+
+  <div class="app">
+    <div class="appInner">
+      <div class="formRow">
+        <div>
+          This will requires <span>4</span> keys to unlock it. Please provide them below.
+        </div>
+        <div>
+          <input type="text">
+        </div>
+        <div>
+          <input type="text">
+        </div>
+        <div>
+          <input type="text">
+        </div>
+        <div>
+          <input type="text">
+        </div>
+      </div>
+      <div class="formRow">
+        <div>
+          Sorry this will is not scheduled to be unlocked yet. Please wait until XXX
+        </div>
+      </div>
+      <div>
+        <button id="unlockWill">Unlock Will</button>
+      </div>
+
+    </div>
+  </div>
+  
+  <script>
+    $(function(){
+      $("#unlockWill").click(function(){
+        window.location.href = "/redeem-will-content";
+      })
+    })
+  </script>
+<% include footer %>

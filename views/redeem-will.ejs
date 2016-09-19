@@ -1,0 +1,36 @@
+<% include header %>
+<% include main-nav %>
+
+  <div class="app">
+    <div class="appInner">
+      <div class="formRow">
+        <div>
+          Enter Will ID:
+        </div>
+        <div>
+          <input type="text">
+        </div>
+      </div>
+      <div class="formRow">
+        <div>
+          Enter Name of Will User:
+        </div>
+        <div>
+          <input type="text">
+        </div>
+      </div>
+      <div>
+        <button id="findWill">Find Will</button>
+      </div>
+
+    </div>
+  </div>
+  
+  <script>
+    $(function(){
+      $("#findWill").click(function(){
+        window.location.href = "/redeem-will-combine";
+      })
+    })
+  </script>
+<% include footer %>

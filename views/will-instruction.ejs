@@ -1,0 +1,42 @@
+<% include header %>
+<% include main-nav %>
+
+  <div class="app">
+    <div class="appInner">
+  <h1><%-title %></h1>
+  <p>Welcome to <%-title %></p>
+  
+  
+  
+  <form>
+    <div class="formRow">
+      <div>
+        Select Will Type
+      </div>
+      <div>
+        <select>
+          <option value="cryptocurrency">CryptoCurrency</option>
+          <option value="deposit">Deposit Box</option>
+          <option value="gold">Gold Account</option>
+          <option value="others">Others</option>
+        </select>
+      </div>
+    </div>
+    <div class="formRow">
+      <div>
+        Enter the instruction for Will
+      </div>
+      <div>
+        <textarea></textarea>
+      </div>
+    </div>
+    <div>
+      <a href="/will-setting">
+        <div>Proceed & Save Will</div>
+      </a>
+    </div>
+  </form>
+    </div>
+  </div>
+
+<% include footer %>

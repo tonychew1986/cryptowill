@@ -1,0 +1,107 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif; }
+
+html {
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll; }
+
+a {
+  color: #00B7FF; }
+
+input {
+  padding: 2px 5px; }
+
+textarea {
+  min-width: 550px;
+  min-height: 220px; }
+
+button {
+  background-color: #0B7A75;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer; }
+  button:hover {
+    background-color: #074b48; }
+
+.title {
+  font-family: 'Kalam', cursive; }
+
+.clear {
+  clear: both; }
+
+.formRow {
+  margin-bottom: 10px; }
+  .formRow .formRowType {
+    float: left;
+    margin-right: 10px; }
+
+.header {
+  height: 60px;
+  background-color: white;
+  border-bottom: 1px solid #EEE;
+  text-transform: uppercase; }
+  .header .headerInner {
+    max-width: calc(1000px - 30px);
+    padding: 0px 15px;
+    margin: auto; }
+  .header a {
+    color: inherit;
+    text-decoration: none; }
+  .header .headerLogo {
+    float: left;
+    margin-top: 14px;
+    font-family: 'Kalam', cursive;
+    font-size: 24px;
+    color: black;
+    font-weight: 900;
+    letter-spacing: -0.5px; }
+    .header .headerLogo span {
+      font-weight: 300; }
+  .header .headerNav {
+    float: right;
+    margin-top: 24px; }
+    .header .headerNav .headerNavEntry {
+      float: left;
+      margin-right: 15px;
+      font-weight: 700; }
+      .header .headerNav .headerNavEntry:hover {
+        color: red; }
+
+.appSideNav {
+  float: left;
+  width: 250px;
+  margin-right: 15px; }
+
+.app .appInner {
+  max-width: calc(1000px - 30px);
+  padding: 0px 15px;
+  margin: auto;
+  margin-top: 10px; }
+
+.indexHero {
+  background-color: #FBFBFB;
+  width: 100%;
+  height: 240px;
+  margin-bottom: 10px; }
+
+.appWillSummary {
+  background-color: #EEE;
+  padding: 5px 10px;
+  border-radius: 4px; }
+
+.appWillSetting {
+  float: left;
+  width: calc(100% - 265px); }
+  .appWillSetting .appWillSettingStepSection {
+    background-color: #EEE;
+    padding: 10px;
+    margin: 5px 0px; }
+  .appWillSetting input[type='text'] {
+    min-width: 400px; }
